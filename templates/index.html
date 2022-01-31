@@ -1,0 +1,103 @@
+{%extends 'basic.html'%}
+{%block title%}{% endblock %}
+
+
+{%block content%}
+
+<div class="background">
+  <span><img src="/static/cardrip.png" alt="voiture" style="width: 100%; height: auto; margin-bottom: 10px;" /></span>
+</div>
+
+<div class="row g-2" style = " margin-bottom: 20px;  position: relative; top: -10px; left: 190px; background-color: #f2f2f2; padding-left: 7px; padding-bottom: 7px; width: 1260px;">
+
+<div class="col-md">
+    <div class="form-floating">
+      <select class="form-select" id="floatingSelectGrid1" aria-label="Floating label select example" value="" >
+        <option selected >Choix de marque</option>
+        {% for val in marque %}
+        <option>{{val}}</option>
+        {% endfor %}
+        
+      </select>
+      <label for="floatingSelectGrid">Marque</label>
+    </div>
+  </div>
+  <div class="col-md">
+    <div class="form-floating">
+      <select class="form-select" id="floatingSelectGrid2" aria-label="Floating label select example">
+        <option selected>maximum de kilometrage </option>
+        {% for val in kilometrage %}
+        <option >{{val}}</option>
+        {% endfor %}
+        
+      </select>
+      <label for="floatingSelectGrid">Kilometrage</label>
+    </div>
+  </div>
+  <div class="col-md">
+    <div class="form-floating">
+      <select class="form-select" id="floatingSelectGrid3" aria-label="Floating label select example">
+        <option selected>Prix maximum</option>
+        {% for val in prix %}
+        <option >{{val}}</option>
+        {% endfor %}
+        
+      </select>
+      <label for="floatingSelectGrid">prix</label>
+    </div>
+  </div>
+
+  <div class="col-md">
+    <div class="form-floating">
+        <button class="btn btn-outline-success" type="submit" onclick="chercheuse()" style="height: 58px; width: 118px;">Search</button>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+
+
+<div class="row">
+{% for val in liste %}
+
+<div class="card" style="width: 18rem; margin-right: 10px; margin-bottom: 10px;">
+    <img class="card-img-top" src={{val[16][0]}} alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{val[1]}}</h5>
+      <br />
+      <p class="info">  
+          Marque : {{val[2]}} <br />
+          Modele : {{val[4]}} <br />
+          Mise en circulation : {{val[6]}} <br />
+          Kilométrage : {{val[8]}} km <br />
+          Énergie : {{val[9]}} <br />
+          Boîte de vitesse : {{val[11]}} <br />
+          Puissance fiscale : {{val[13]}} ch <br />
+          l'Emission de Co2 : {{val[14]}} g/km  <br />
+      </p>
+     
+      <p>{{val[15]}} €</p>
+
+    </div>
+  </div>
+
+ {% endfor %}
+</div>
+
+
+
+
+<script>
+    function chercheuse(){
+        let marque = document.getElementById("floatingSelectGrid1").value;
+        let kilometrage = document.getElementById("floatingSelectGrid2").value;
+        let prix = document.getElementById("floatingSelectGrid3").value;                                                               
+        window.location.href = "/recherche/"+marque+"/"+kilometrage+"/"+prix;
+    }
+</script>
+
+{% endblock %}
+

@@ -1,0 +1,281 @@
+{%extends 'basic.html'%}
+{%block script%}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript" src="https://me.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=HH2Oir9_q0KoywFb8NOFBDzOP_4yd610Y9WKtCQWteDQfn_4mI3HBTwd7JYRhiwNXQtudZVHZeVLkKMVQc1lanVckOAr4SqB1pB3dTjn0HHHwgn7dLyoJUTcwHLS-fBLEuLvyjN4G4OhEeGpX8dwmw" charset="UTF-8"></script><script async src='/cdn-cgi/bm/cv/669835187/api.js'></script>
+<script type="text/javascript">(function(){window['__CF$cv$params']={r:'6d56898a29b74069',m:'K476FA__H2TAenl9vJfs0_ubJmC0ljuxvDlZ5EgLr34-1643502056-0-AaTbrpT4Ss//lMg9Can3X5SfX3HRlL8Y2j/rD9NbwQ5ZwoFU5KdsnNFCIs8SzywwYnzxIfmIWvbn1dikygP6TLho39P7S4VziNwlVjUjenuGcRze84fRLn3IPNI284+89mntpd2cbGL+U8VsB6rl0FPJUmyNKdQ5r3c1kHwd1FO4g3FN4pyW2u1KTlVpcCugVA==',s:[0x1a954cbce3,0x650e298057],}})();</script>
+{% endblock%}
+
+{%block content%}
+
+<div class="row p-4" >
+                                          <!-- Titre -->
+  <div class="card mb-4 ml-auto mr-auto" style="width: 90%; margin: auto;background-color: #f2f2f2; border: none;"  data-aos = "fade-up-right" data-aos-duration = "3000">
+   <div class="card-body">
+     <h1 >
+      <CENTER> Nos données </CENTER>
+     </h1>
+   </div>
+  </div>
+                                          <!-- Text -->
+  <div class="card mb-4 ml-auto mr-auto" style="width: 90%; margin: auto;background-color: #f2f2f2; border: none;"  data-aos = "fade-up-right" data-aos-duration = "3000">
+    <div class="card-body">
+      <h3 style="font-size: 20px;">
+        On affiche le nombre de véhicule selon : 
+      </h3>
+    </div>
+  </div>
+                                         <!-- courbe1 et courbe2 -->
+  <div class="card mb-4 ml-auto mr-auto" style="width: 90%; margin: auto;background-color: #f2f2f2; border: none; margin-top: -40px;"  data-aos = "fade-up-right" data-aos-duration = "3000">
+  <div class="card-body">
+  <div style = "float:left;">
+  <canvas id="monGraph"  width= "600" height="400"></canvas>
+  </div>
+  <script>
+  const ctx = document.getElementById("monGraph").getContext("2d");
+  const data = {
+  labels: {{label|safe}}, 
+  datasets: [
+  {
+
+  data: {{valeur|safe}},
+  label: "Les différents types de carburant",
+  backgroundColor: [ 
+  'rgba(35, 182, 145, 0.3)',
+  'rgba(153, 102, 255, 0.2)',
+  'rgba(54, 162, 235, 0.2)',
+  'rgba(255, 158, 52, 0.5)'
+  ],
+  },
+
+  ],
+  };
+
+  const config = {
+  type: 'pie',
+  data: data,
+  options: {
+  plugins: {
+  title: {
+  display: true,
+  text: 'Les différents types de carburant',
+  font: {
+      size: 20
+  },
+  padding: {
+      top: 10,
+      bottom: 30
+  }
+  },
+  legend: {
+  display: true,
+  position: 'bottom',
+  labels: {
+      // This more specific font property overrides the global property
+      font: {
+          size: 14
+      }
+  }
+  },
+
+  },
+
+  aspectRatio: 3 / 2,
+  cutoutPercentage: 8,
+  layout: {
+  padding: 16
+  },
+  elements: {
+  line: {
+  fill: false,
+  tension: 0.4
+  },
+  point: {
+  hoverRadius: 7,
+  radius: 5
+  }
+  },
+
+  }
+  };
+  const monGraph = new Chart(ctx, config);
+  </script>
+  <div style = "float:right;">
+  <canvas id="monGraph2"  width= "600" height="400"></canvas>
+  </div>
+  <script>
+  const ctx2 = document.getElementById("monGraph2").getContext("2d");
+  const data2 = {
+  labels: {{label2|safe}}, 
+  datasets: [
+  {
+  data: {{valeur2|safe}},
+  label: "Les différents mode de conduite",
+  backgroundColor: [ 
+  'rgb(255, 99, 132)',
+  'rgb(54, 162, 235)',
+  ],
+  },
+
+  ],
+  };
+  const config2 = {
+  type: 'doughnut',
+  data: data2,
+  options: {
+  plugins: {
+    title: {
+        display: true,
+        text: 'Les différents mode de conduite',
+        font: {
+            size: 20
+        },
+        padding: {
+            top: 10,
+            bottom: 30
+        }
+    },
+    legend: {
+        display: true,
+        position: 'bottom',
+        labels: {
+            // This more specific font property overrides the global property
+            font: {
+                size: 14
+            }
+        }
+    },
+    
+  },
+
+  aspectRatio: 3 / 2,
+  cutoutPercentage: 8,
+  layout: {
+    padding: 16
+  },
+  elements: {
+    line: {
+        fill: false,
+        tension: 0.4
+    },
+    point: {
+        hoverRadius: 7,
+        radius: 5
+    }
+  },
+
+  }
+  };
+
+  const monGraph2 = new Chart(ctx2, config2);
+  </script>
+  </div>
+  </div>
+                                        <!-- courbe3 -->
+  <div class="card mb-4 ml-auto mr-auto" style="width: 870px; margin: auto;background-color: #f2f2f2; border: none; margin-top: -40px;"  data-aos = "fade-up-right" data-aos-duration = "3000">
+  <div class="card-body">
+  <div>
+  <canvas id="monGraph3"  width= "900" height="400"></canvas>
+  </div>
+  <script>
+  const ctx3 = document.getElementById("monGraph3").getContext("2d");
+
+  function getRandomColor(n) {
+  var letters = '0123456789ABCDEF'.split('');
+  var color = '#';
+  var colors = [];
+  for(var j = 0; j < n; j++){
+  for (var i = 0; i < 6; i++ ) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  colors.push(color);
+  color = '#';
+  }
+  return colors;
+  }
+
+  const data3 = {
+  labels: {{label3|safe}},
+  datasets: [
+  {
+
+  data: {{valeur3|safe}},
+  label: "Marque",
+  backgroundColor: getRandomColor({{valeur3|safe}}.length)
+  },
+
+  ],
+  };
+
+  const config3 = {
+  type: 'bar',
+  data: data3,
+  options: {
+  responsive: true,
+  animations: {
+      tension: {
+        duration: 1000,
+        easing: 'linear',
+        from: 1,
+        to: 0,
+        loop: true
+      }
+    },
+  plugins: {
+      title: {
+          display: true,
+          text: 'Les différent constructeur',
+          font: {
+              size: 20
+          },
+          padding: {
+              top: 10,
+              bottom: 30
+          }
+      },
+      subtitle: {
+          display: true,
+          text: 'Nombre',
+          position: 'left',
+          font: {
+              size: 14
+          }
+      },
+      legend: {
+          display: true,
+          position: 'bottom',
+          labels: {
+              // This more specific font property overrides the global property
+              font: {
+                  size: 14
+              }
+          }
+      },
+      
+  },
+
+  aspectRatio: 3 / 2,
+  cutoutPercentage: 8,
+  layout: {
+      padding: 16
+  },
+  elements: {
+      line: {
+          fill: false,
+          tension: 0.4
+      },
+      point: {
+          hoverRadius: 7,
+          radius: 5
+      }
+  },
+
+  }
+  };
+
+  const monGraph3 = new Chart(ctx3, config3);
+
+  </script>
+  </div>
+  </div>
+</div>
+{% endblock %}

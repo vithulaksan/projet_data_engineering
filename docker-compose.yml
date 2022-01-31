@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+    - "5001:5000"
+    volumes:
+    - .:/projet_data_engeeniring
+  
+  mongo:
+    image: mongo
+    volumes:
+      - ./data/mongo:/data/db
+    ports:
+        - 27017:27017
